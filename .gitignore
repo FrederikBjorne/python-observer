@@ -1,0 +1,10 @@
+### mac osx ###
+.DS_Store
+
+### python ###
+*.py[co]
+
+docs/index.md
+site/
+.txt
+/.idea/*
