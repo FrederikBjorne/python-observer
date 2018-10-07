@@ -6,8 +6,11 @@ from abc import abstractmethod
 
 class Observer(object):
     """
-    This abstract class is the observer listening for updates from the Observable (Subject).
-    It registers itself to the Observable class object for updates calling Observable.attach.
+    This abstract class represents the observer listening for updates from the Observable (Subject).
+    A concrete observer implementation inheriting from this class, registers itself to the Observable
+    class object for updates by calling Observable.attach. Notifications of a new state is received
+    in the Observer.update implementation of the sub type where any threading or queueing may be put
+    if needed by the application.
 
     Typical usage:
         >>> from Observer import Observer
@@ -16,7 +19,7 @@ class Observer(object):
         ...         super(NewValueSubscriber, self).__init__()
         ...         self._value = 0
         ...     def update(self, new_value):
-        ...             print('{} received new value: {}'.format(self._name, new_value[0]))
+        ...         print('{} received new value: {}'.format(self._name, new_value[0]))
     """
     __metaclass__ = ABCMeta
 
@@ -28,7 +31,8 @@ class Observer(object):
         """
         Called by the concrete Observable when data has changed passing its state (aka new value).
         :param new_state: The new state.
-        :type new_state: tuple value.
+        :param new_state: The new state.
+        :type new_state: A tuple of arbitrary content.
         """
         pass
 
@@ -39,8 +43,9 @@ class Observer(object):
 
 class Observable(object):
     """
-    This base class represents an observable (also known as a subject or publisher).
-    A concrete observer may register for updates using the attach method.
+    This base class represents an observable (also known as a subject or publisher) with a one-to-many
+    relationship with its registered observers.
+    A concrete observer implementation may register for updates using the attach method.
 
     Typical usage:
         >>> from Observer import Observable
@@ -54,7 +59,7 @@ class Observable(object):
         ...     @value.setter
         ...     def value(self, value):
         ...         self._value = value
-        ...         self.notify(value)  # using a property for updating value and subscribers/observers
+        ...         self.notify(value)
         ...
     """
 
@@ -67,7 +72,7 @@ class Observable(object):
         Attach an Observer wanting to be notified of updates from the concrete Observable.
         :param observer: The listener object to be removed.
         :type observer: Observer
-        :raise ValueError
+        :raise ValueError is raised if the observer object is not of type Observer
         """
         if not isinstance(observer, Observer):
             raise ValueError('You need to pass a valid Observer class object')
@@ -85,7 +90,8 @@ class Observable(object):
     def notify(self, *new_state):
         """
         The new state is updated to all registered Observers.
-        :param state: The new state as a tuple value.
+        :param new_state: The new state.
+        :type new_state: A tuple of arbitrary content.
         """
         for observer in self._observers:
             observer.update(new_state)
