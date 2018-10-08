@@ -11,8 +11,7 @@ class Observer(object):
     A concrete observer implementation inheriting from this class, registers itself to a concrete
     Observable class object for updates by calling Observable.attach. Notifications of a new state
     is received in the Observer.update implementation of the sub type where any threading or
-    queueing may be put
-    if needed by the application.
+    queueing may be put if needed by the application.
 
     Typical usage:
         >>> from Observer import Observer
@@ -61,7 +60,7 @@ class Observable(object):
     """
     This base class represents an observable (also known as a subject or publisher) with a one-to-many
     relationship with its registered observers.
-    A concrete observer implementation may register for updates using the attach method.
+    A concrete observer implementation registers for updates using the attach method.
 
     Typical usage:
         >>> from Observer import Observable
@@ -75,7 +74,7 @@ class Observable(object):
         ...     @value.setter
         ...     def value(self, value):
         ...         self._value = value
-        ...         self.notify(value)
+        ...         self.notify(value)  # We update immediately after changing the property
         ...
     """
 
