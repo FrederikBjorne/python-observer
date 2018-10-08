@@ -14,7 +14,6 @@ from Observer import Observable, Observer
         def update(self, new_value):
             print('{} received new value: {}'.format(self.name, new_value[0]))
 
-
     class NewValuePublisher(Observable):
         def __init__(self):
             super(NewValuePublisher, self).__init__()
@@ -31,9 +30,28 @@ from Observer import Observable, Observer
             self.notify(value)
 
     publisher = NewValuePublisher()
-    publisher.attach(NewValueSubscriber())
+    listener = NewValueSubscriber()
+    listener2 = NewValueSubscriber()
+    publisher.attach(listener)
+    publisher.attach(listener)  # this is ignored
+    publisher.attach(listener2)
     publisher.value = 5
+    publisher.detach(listener)
+    publisher.value = 6
 ```
 
+This gives the following console output:
+```commandline
+$ python observer.py 
+NewValuePublisher updating new value: 5 to observers
+NewValueSubscriber0 received new value: 5
+NewValueSubscriber1 received new value: 5
+NewValuePublisher updating new value: 6 to observers
+NewValueSubscriber1 received new value: 6
+```
+
+
 ##Prerequisites
-Python2.6+ [Install python2.7](https://www.python.org/downloads/)
+Works for both Python2.6+ or python3
+
+[Install python](https://www.python.org/downloads/)
