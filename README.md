@@ -54,3 +54,9 @@ NewValueSubscriber1 received new value: 6
 
 Works for both Python2.6+ or python3
 [Install python](https://www.python.org/downloads/)
+
+##Install this package directly
+Get observer package by issuing the following command:
+```console
+$ pip install git+https://github.com/FrederikBjorne/python-observer.git
+```
