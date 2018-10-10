@@ -7,7 +7,7 @@ setup(
     author = 'Frederik Bjorne',
     author_email = 'frederik.bjorne@gmail.com',
     description = 'Observer pattern implementation',
-    packages = ['observer'],
+    packages = ['python-observer'],
     license = 'MIT',
     install_requires = [],
 )
