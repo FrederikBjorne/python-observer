@@ -1,4 +1,4 @@
-from setuptools import setup, find_packages
+from setuptools import setup
 
 setup(
     name = 'py-observer',
@@ -7,6 +7,7 @@ setup(
     author = 'Frederik Bjorne',
     author_email = 'frederik.bjorne@gmail.com',
     description = 'Observer pattern implementation',
-    packages = find_packages(),    
+    packages = ['observer'],
+    license = 'MIT',
     install_requires = [],
 )
