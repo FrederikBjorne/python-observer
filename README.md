@@ -58,5 +58,5 @@ Works for both Python2.6+ or python3
 ## Install this package directly
 Get this package by issuing the following command:
 ```console
-$ pip install git+https://github.com/FrederikBjorne/python-observer.git
+$ pip install git+https://github.com/FrederikBjorne/python-observer
 ```
