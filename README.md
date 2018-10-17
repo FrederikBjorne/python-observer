@@ -4,6 +4,7 @@ The classic observer pattern uses two classes:
 - Observer: This class is the observer that listens to updates from the provider
 
 ## Example usage
+The below example application resides in observer.py and can be run by running the module.
 ```python
 from Observer import Observable, Observer
 
@@ -37,7 +38,9 @@ publisher.attach(listener)  # this is ignored
 publisher.attach(listener2)
 publisher.value = 5
 publisher.detach(listener)
-publisher.value = 6
+publisher.value = 6  # only listener2 is updated
+publisher.detach(listener)  # last listener is detached
+publisher.value = 7  # nobody is updated
 ```
 
 This gives the following console output:

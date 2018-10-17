@@ -8,7 +8,7 @@ class Observer(object):
     """
     This abstract class represents the observer listening for updates from the Observable object
     (Subject).
-    A concrete observer implementation inheriting from this class, registers itself to a concrete
+    A concrete observer implementation sub typing this class, registers itself to a concrete
     Observable class object for updates by calling Observable.attach. Notifications of a new state
     is received in the Observer.update implementation of the sub type where any threading or
     queueing may be put if needed by the application.
@@ -28,8 +28,8 @@ class Observer(object):
 
     def __init__(self, name=None):
         """
-        :param name: A name may be set for this class object for easy identification. if not set
-        the class name is used with a class object counter.
+        :param name: A name may be set for the subtyping class object for easy identification.
+        if not set, the class name is used with a class object counter.
         """
         self.name = name if name else self.__class__.__name__ + str(Observer._object_counter)
         Observer._object_counter += 1
@@ -60,7 +60,7 @@ class Observable(object):
     """
     This base class represents an observable (also known as a subject or publisher) with a one-to-many
     relationship with its registered observers.
-    A concrete observer implementation registers for updates using the attach method.
+    A concrete observer implementation registers it self for updates using the attach method.
 
     Typical usage:
         >>> from Observer import Observable
@@ -118,7 +118,12 @@ class Observable(object):
 
 
 if __name__ == "__main__":
-
+    """
+       This is a simple example application showing how to use the pattern. In this case, an object
+       property in a typical pojo (data class) is used for updating a property value. If somebody
+       updates the value, its observers/listeners are updated. This implementation is typically
+       used for presentation of data.
+    """
     class NewValueSubscriber(Observer):
         def __init__(self):
             super(NewValueSubscriber, self).__init__()
@@ -150,4 +155,6 @@ if __name__ == "__main__":
     publisher.attach(listener2)
     publisher.value = 5
     publisher.detach(listener)
-    publisher.value = 6
+    publisher.value = 6  # only listener2 is updated
+    publisher.detach(listener)  # last listener is detached
+    publisher.value = 7  # nobody is updated
