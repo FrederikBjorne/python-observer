@@ -144,7 +144,9 @@ if __name__ == "__main__":
         @value.setter
         def value(self, value):
             self._value = value
-            print('{} updating new value: {} to observers'.format(self.name, value))
+            print('New value: {}'.format(value))
+            if self._observers:
+                print('{} updating new value: {} to observers'.format(self.name, value))
             self.notify(value)  # using a property for updating value and subscribers/observers
 
     publisher = NewValuePublisher()
@@ -156,5 +158,5 @@ if __name__ == "__main__":
     publisher.value = 5
     publisher.detach(listener)
     publisher.value = 6  # only listener2 is updated
-    publisher.detach(listener)  # last listener is detached
+    publisher.detach(listener2)  # last listener is detached
     publisher.value = 7  # nobody is updated

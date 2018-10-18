@@ -39,18 +39,21 @@ publisher.attach(listener2)
 publisher.value = 5
 publisher.detach(listener)
 publisher.value = 6  # only listener2 is updated
-publisher.detach(listener)  # last listener is detached
+publisher.detach(listener2)  # last listener is detached
 publisher.value = 7  # nobody is updated
 ```
 
 This gives the following console output:
 ```commandline
 $ python observer.py 
+New value: 5
 NewValuePublisher updating new value: 5 to observers
 NewValueSubscriber0 received new value: 5
 NewValueSubscriber1 received new value: 5
+New value: 6
 NewValuePublisher updating new value: 6 to observers
 NewValueSubscriber1 received new value: 6
+New value: 7
 ```
 
 ## Prerequisites
