@@ -1,7 +1,7 @@
-# A Python observer pattern implementation
+# A simple Python observer pattern implementation
 The classic observer pattern uses two classes:
 - Observable: This class is the provider of the observed state as implemented by the sub type
-- Observer: This class is the observer that listens to updates from the provider
+- Observer: This class is a registered subscriber listening to updates from the provider
 
 ## Example usage
 The below example application resides in observer.py and can be run by running the module.
