@@ -6,7 +6,7 @@ The classic observer pattern uses two classes:
 ## Example usage
 The below example application resides in observer.py and can be run by running the module.
 ```python
-from Observer import Observable, Observer
+from observer import Observable, Observer
 
 class NewValueSubscriber(Observer):
     def __init__(self):
@@ -65,4 +65,10 @@ Works for both Python2.6+ or python3
 Get this package by issuing the following command:
 ```console
 $ pip install git+https://github.com/FrederikBjorne/python-observer
+```
+
+then import it like this:
+
+```
+from observer import ...
 ```
